@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { parseJD, getScore, applyChanges, getTemplates, loadTemplate } from "@/services/api";
+import { parseJD, getScore, applyChanges, getTemplates, loadTemplate, API_BASE_URL } from "@/services/api";
 
 type Skill = {
   name: string;
@@ -505,7 +505,7 @@ export default function Home() {
     if (skillsToSend.length === 0) return alert("Select at least one RELATED or STRONG skill");
     setGeneratingExp(true);
     try {
-      const res = await fetch("http://localhost:8000/resume/generate-experience", {
+      const res = await fetch(`${API_BASE_URL}/resume/generate-experience`, {
         method: "POST",
         body: JSON.stringify({ skills: selectedSkills, parsed: parsedResume }),
         headers: { "Content-Type": "application/json" },

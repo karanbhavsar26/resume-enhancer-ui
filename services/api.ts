@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:8000"; // FastAPI
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+
+const BASE_URL = API_BASE_URL; // FastAPI
 
 export const parseJD = async (jd: string) => {
   const res = await fetch(`${BASE_URL}/jd/parse-jd`, {
@@ -49,11 +52,11 @@ export const applyChanges = async ({
     return res.json();
   };
 export const getTemplates = async () => {
-    const res = await fetch("http://localhost:8000/resume/templates");
+    const res = await fetch(`${BASE_URL}/resume/templates`);
     return res.json();
   };
   
   export const loadTemplate = async (name: string) => {
-    const res = await fetch(`http://localhost:8000/resume/load/${name}`);
+    const res = await fetch(`${BASE_URL}/resume/load/${name}`);
     return res.json();
   };
