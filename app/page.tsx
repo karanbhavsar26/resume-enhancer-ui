@@ -533,6 +533,15 @@ export default function Home() {
     }
   };
 
+  const cleanHtml = (raw: string) => {
+    if (!raw) return raw;
+  
+    return raw
+      .replace(/```html/g, "")
+      .replace(/```/g, "")
+      .trim();
+  };
+
   const handleApply = async () => {
     setApplying(true);
     try {
@@ -546,7 +555,9 @@ export default function Home() {
         experience_updates: expUpdates,
       });
       console.log("res.parsed", res.parsed);
-      setHtml(res.html);
+      const cleanedHtml = cleanHtml(res.html);
+
+      setHtml(cleanedHtml);
       setParsedResume(res.parsed);
       setSelectedSkills([]);
       setMcqOptions({});
